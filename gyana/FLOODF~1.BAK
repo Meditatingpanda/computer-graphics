@@ -1,0 +1,37 @@
+
+#include<iostream.h>
+#include<graphics.h>
+#include<dos.h>
+#include <conio.h>
+int oldCol=0,newCol=15;
+//void far *p(unsigned char, unsigned char);
+void floodFill(unsigned char x, unsigned char  y)
+{
+if(getpixel(x,y) == oldCol)
+{
+putpixel(x,y,newCol);
+floodFill(x+1,y);
+floodFill(x,y+1);
+floodFill(x-1,y);
+floodFill(x,y-1);
+}
+}
+//getpixel(x,y) gives the color of specified pixel
+
+int main()
+{
+int gm,gd=DETECT,radius;
+int x,y;
+//void far *p=&;
+cout<<"Enter x and y positions for circle\n";
+cin>>x>>y;
+cout<<"Enter radius of circle\n";
+cin>>radius;
+initgraph(&gd,&gm,"c:\\turboc3\\bgi");
+circle(x,y,radius);
+floodFill(x,y);
+delay(1);
+getch();
+//closegraph();
+return 0;
+}
